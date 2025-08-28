@@ -1,17 +1,15 @@
-[project]
-name = "ds-crypto"
+[tool.poetry]
+name = "sistema-distribuido"
 version = "0.1.0"
 description = ""
-authors = [
-    {name = "Joao",email = "gabrieljoao@aluno.ifce.edu.br"}
-]
+authors = ["gabrieljoao220 <gabrieljoao@aluno.ifce.edu.br>"]
 readme = "README.md"
-requires-python = ">=3.12"
-dependencies = [
-    "requests (>=2.32.5,<3.0.0)"
-]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+requests = "^2.32.5"
 
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
