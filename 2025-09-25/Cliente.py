@@ -23,20 +23,24 @@ def ver_coordenador():
     print("Coordenador:", r.json())
 
 def start_election():
-    r = requests.post(f"{SERVER}/start_election", timeout=3)
-    print("Start election:", r.status_code, r.text)
+    """Inicia uma eleição a partir do nó conectado"""
+    print(f"Pedindo para o Nó em {SERVER} iniciar uma eleição...")
+    try:
+        iniciador_id = int(input("Qual nó deve iniciar a eleição? (ex: 1): "))
+        payload = {"iniciador": iniciador_id, "ids": [iniciador_id], "participando": {str(iniciador_id): True}}
+        r = requests.post(f"{SERVER}/eleicao", json=payload, timeout=3)
+        print("Resposta do início da eleição:", r.status_code, r.text)
+    except Exception as e:
+        print(f"Erro ao iniciar eleição: {e}")
 
 if __name__ == "__main__":
     while True:
-        print("\n1 Inserir  2 Listar  3 Ver coordenador  4 Iniciar eleição  0 Sair")
+        print("\nOpções:")
+        print("  3: Ver coordenador atual")
+        print("  4: Iniciar uma nova eleição")
+        print("  0: Sair")
         op = input("> ").strip()
-        if op == "1":
-            remetente = int(input("remetente id: "))
-            msg = input("mensagem: ")
-            inserir_item(remetente, msg)
-        elif op == "2":
-            listar_itens()
-        elif op == "3":
+        if op == "3":
             ver_coordenador()
         elif op == "4":
             start_election()
